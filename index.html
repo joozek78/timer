@@ -29,12 +29,19 @@
         .hidden {
             display: none;
         }
+      #start { 
+        margin: 5px 0
+      }
     </style>
 </head>
 <body>
     <form onsubmit="start; return false" id="setup">
-        <input id="minutes"/>
+        <div>
+          <label><input value="5" type="number" id="minutes"/> Minutes</label>
+      </div>
+      <div>
         <button id="start">Start</button>
+      </div>
     </form>
     <div id="display" class="display">
         <div id="display-time">0:00</div>
