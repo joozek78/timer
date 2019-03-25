@@ -52,9 +52,10 @@
         var minutesInput = document.querySelector("#minutes");
         var displayDiv = document.querySelector("#display");
         var timeDiv = document.querySelector("#display-time");
-        var interval, secondsLeft;
+        var interval, secondsLeft, secondsIncrement;
         (function() {
             document.querySelector("#start").addEventListener("click", start);
+            displayDiv.addEventListener("click", startStopwatch);
         })();
 
         function start() {
@@ -63,6 +64,22 @@
             }
 
             secondsLeft = parseInt(minutesInput.value) * 60;
+            secondsIncrement = -1;
+            interval = window.setInterval(update, 1000);
+
+            document.querySelector("#setup").classList.add("hidden");
+
+            return false;
+        }
+
+        function startStopwatch() {
+            if(interval !== null){
+                clearInterval(interval);
+            }
+
+            secondsLeft = 0;
+            secondsIncrement = 1;
+
             interval = window.setInterval(update, 1000);
 
             document.querySelector("#setup").classList.add("hidden");
@@ -75,7 +92,7 @@
             if(secondsLeft < 0) {
                 displayDiv.classList.add('overtime');
             }
-            secondsLeft--;
+            secondsLeft+=secondsIncrement;
         }
 
         function formatTime(totalSeconds) {
